@@ -125,12 +125,15 @@ if (!isset($_GET["Cleanup"])) {
                     $containerName."/".
                     $fileToUpload
                 ."</p>";
+                ?>
+                <style>
+                    button#processImage,.resultAnalize {
+                        display:block !important;
+                    }
+                </style>
+                <?php
                 // $blob = $blobClient->getBlob($containerName, $fileToUpload);
                 // fpassthru($blob->getContentStream());
-                ?>
-       
-                
-                <?php
                 echo "<br />";
             }
             catch(ServiceException $e){
@@ -194,6 +197,18 @@ else
         width:50%;
         height:500px;
     }
+    .button {
+        background-color: #4CAF50; /* Green */
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+    }
 
 </style>    
     <div class="main">
@@ -203,15 +218,22 @@ else
                 Select image to analize:
                 <input type="file" name="fileToUpload" id="fileToUpload">
                 <br><br>
-                <input type="submit" value="Analize" name="submit">
+                <input type="submit" value="Upload" name="submit">
             </form>
+            </div>
+            <div class="inner-form" style="border:none;">
+            <button class="button" style="display:none;" id="processImage" onclick="processImage()">Analize Image</button>
             </div>
         </div>
         <div class="body">
             <center>
                 <img id="sourceImage" width="400" style="margin-top:60px;"/>
-                <h2 id="captionJson"></h2>
-            </center>    
+                
+            </center>   
+            <div class="resultAnalize" style="display:none;">
+                <h3>Hasil Analisis</h3>
+            <textarea id="responseTextArea" style="width:580px; height:400px;"></textarea> 
+            </div>
         </div>
     </div>
     <script>
@@ -220,6 +242,11 @@ else
         // **********************************************
  
         // Replace <Subscription Key> with your valid subscription key.
+        var sourceImageUrl = document.getElementById("targetFileBlob").textContent;
+            
+            document.querySelector("#sourceImage").src = sourceImageUrl;
+        function processImage(){ 
+            document.getElementById("responseTextArea").value = "On Proggress, Please Wait...";
         var subscriptionKey = "f756a031fd4b4335a3b3fe9842f86bed";
  
                 // You must use the same Azure region in your REST API method as you used to
@@ -244,9 +271,9 @@ else
                 // Display the image.
                 // var sourceImageUrl = document.getElementById("inputImage").value;
                 // var sourceImageUrl = "https://olegstore.blob.core.windows.net/mycontainer/people.jpg";
-                var sourceImageUrl = document.getElementById("targetFileBlob").textContent;
+                // var sourceImageUrl = document.getElementById("targetFileBlob").textContent;
             
-                document.querySelector("#sourceImage").src = sourceImageUrl;
+                // document.querySelector("#sourceImage").src = sourceImageUrl;
                 
                 // Make the REST API call.
                 $.ajax({
@@ -268,8 +295,8 @@ else
                 .done(function(data) {
                     // Show formatted JSON on webpage.
                     $("#responseTextArea").val(JSON.stringify(data, null, 2));
-                    document.getElementById("captionJson").innerHTML = data.description.captions[0].text;
-                    
+                    // document.getElementById("captionJson").innerHTML = data.description.captions[0].text;
+                    // document.getElementById("dataAnalize").innerHTML = data
                     console.log(data.description.captions[0].text);  
                 })
 
@@ -281,4 +308,5 @@ else
                         jQuery.parseJSON(jqXHR.responseText).message;
                     alert(errorString);
                 });
+            }
         </script>

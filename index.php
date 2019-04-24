@@ -53,7 +53,7 @@ if(isset($_POST["submit"])) {
             echo "<br />";
             echo "This is the content of the blob uploaded: ";
             echo "<p id='targetFileBlob' style='display:none;'>".
-                "https://dicodinggolok.blob.core.windows.net/". $containerName. "/". $fileToUpload .
+                "https://dicodinggolokstore.blob.core.windows.net/". $containerName. "/". $fileToUpload .
                 "</p>";?>
             <style>
                 button#processImage,.resultAnalize {
@@ -153,9 +153,7 @@ if(isset($_POST["submit"])) {
         function processImage(){ 
             document.getElementById("responseTextArea").value = "On Proggress, Please Wait...";
             var subscriptionKey = "e36088d6afc04c74abf2c3b4bfb14276";
-    
             var uriBase = "https://australiaeast.api.cognitive.microsoft.com/vision/v2.0/analyze";     
-
             var params = {
                 "visualFeatures": "Categories,Description,Color",
                 "details": "",

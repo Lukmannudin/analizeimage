@@ -12,83 +12,69 @@ $connectionString = "DefaultEndpointsProtocol=https;AccountName=dicodinggoloksto
 
 $blobClient = BlobRestProxy::createBlobService($connectionString);
 
-if (!isset($_GET["Cleanup"])) {
-    $createContainerOptions = new CreateContainerOptions();
-    $createContainerOptions->setPublicAccess(PublicAccessType::CONTAINER_AND_BLOBS);
-    $createContainerOptions->addMetaData("key1", "value1");
-    $createContainerOptions->addMetaData("key2", "value2");
-    $containerName = "mycontainer";
-    if(isset($_POST["submit"])) {
-        $target_dir = "uploads/";
-        $filename = str_replace(' ', '_', $_FILES["fileToUpload"]["name"]);
-        $target_file = $target_dir . basename($filename);
-        move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file);
-        $fileToUpload = "$target_dir"."$filename";
-        $fileToUpload = str_replace(' ', '_', $fileToUpload);
-        if (file_exists($target_file)) {
-            try {
-                $myfile = fopen($fileToUpload, "r") or die("Unable to open file!");
-                fclose($myfile);
+$createContainerOptions = new CreateContainerOptions();
+$createContainerOptions->setPublicAccess(PublicAccessType::CONTAINER_AND_BLOBS);
+$createContainerOptions->addMetaData("key1", "value1");
+$createContainerOptions->addMetaData("key2", "value2");
+$containerName = "mycontainer";
+if(isset($_POST["submit"])) {
+    $target_dir = "uploads/";
+    $filename = str_replace(' ', '_', $_FILES["fileToUpload"]["name"]);
+    $target_file = $target_dir . basename($filename);
+    move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file);
+    $fileToUpload = "$target_dir"."$filename";
+    $fileToUpload = str_replace(' ', '_', $fileToUpload);
+    if (file_exists($target_file)) {
+        try {
+            $myfile = fopen($fileToUpload, "r") or die("Unable to open file!");
+            fclose($myfile);
 
-                echo "Uploading BlockBlob: ".PHP_EOL;
-                echo $fileToUpload;
-                echo "<br />";
-                
-                $content = fopen($fileToUpload, "r");
+            echo "Uploading BlockBlob: ".PHP_EOL;
+            echo $fileToUpload;
+            echo "<br />";
+            
+            $content = fopen($fileToUpload, "r");
 
-                $blobClient->createBlockBlob($containerName, $fileToUpload, $content);
-                
-                $listBlobsOptions = new ListBlobsOptions();
-                $listBlobsOptions->setPrefix("HelloWorld");
+            $blobClient->createBlockBlob($containerName, $fileToUpload, $content);
+            
+            $listBlobsOptions = new ListBlobsOptions();
+            $listBlobsOptions->setPrefix("HelloWorld");
 
-                echo "These are the blobs present in the container: ";
+            echo "These are the blobs present in the container: ";
 
-                do {
-                    $result = $blobClient->listBlobs($containerName, $listBlobsOptions);
-                    foreach ($result->getBlobs() as $blob) {
-                        echo $blob->getName().": ".$blob->getUrl()."<br />";
-                    }
-                
-                    $listBlobsOptions->setContinuationToken($result->getContinuationToken());
-                } while($result->getContinuationToken());
-                echo "<br />";
-                echo "This is the content of the blob uploaded: ";
-                echo "<p id='targetFileBlob' style='display:none;'>".
-                    "https://dicodinggolok.blob.core.windows.net/". $containerName. "/". $fileToUpload .
-                    "</p>";
-                ?>
-                <style>
-                    button#processImage,.resultAnalize {
-                        display:block !important;
-                    }
-                </style>
-                <?php
-                echo "<br />";
-            } catch(ServiceException $e) {
-                $code = $e->getCode();
-                $error_message = $e->getMessage();
-                echo $code.": ".$error_message."<br />";
-            } catch(InvalidArgumentTypeException $e) {
-                $code = $e->getCode();
-                $error_message = $e->getMessage();
-                echo $code.": ".$error_message."<br />";
-            }
+            do {
+                $result = $blobClient->listBlobs($containerName, $listBlobsOptions);
+                foreach ($result->getBlobs() as $blob) {
+                    echo $blob->getName().": ".$blob->getUrl()."<br />";
+                }
+            
+                $listBlobsOptions->setContinuationToken($result->getContinuationToken());
+            } while($result->getContinuationToken());
+            echo "<br />";
+            echo "This is the content of the blob uploaded: ";
+            echo "<p id='targetFileBlob' style='display:none;'>".
+                "https://dicodinggolok.blob.core.windows.net/". $containerName. "/". $fileToUpload .
+                "</p>";?>
+            <style>
+                button#processImage,.resultAnalize {
+                    display:block !important;
+                }
+            </style>
+            <?php
+            echo "<br />";
+        } catch(ServiceException $e) {
+            $code = $e->getCode();
+            $error_message = $e->getMessage();
+            echo $code.": ".$error_message."<br />";
+        } catch(InvalidArgumentTypeException $e) {
+            $code = $e->getCode();
+            $error_message = $e->getMessage();
+            echo $code.": ".$error_message."<br />";
         }
+    } else {
+        echo "File nya ga ada";
     }
-} else {
-    try {
-        echo "Deleting Container".PHP_EOL;
-        echo $_GET["containerName"].PHP_EOL;
-        echo "<br />";
-        $blobClient->deleteContainer($_GET["containerName"]);
-    }
-    catch(ServiceException $e) {
-        $code = $e->getCode();
-        $error_message = $e->getMessage();
-        echo $code.": ".$error_message."<br />";
-    }
-}
-?>
+}?>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
 <style>
     .main {

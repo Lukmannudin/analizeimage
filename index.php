@@ -55,8 +55,13 @@ if(isset($_POST["submit"])) {
             echo "<p id='targetFileBlob' style='display:none;'>".
                     "https://dicodinggolok.blob.core.windows.net/" .
                     $containerName . "/" . $fileToUpload . "</p>";
-            echo "<br />";
-        } catch(ServiceException $e) {
+            echo "<br />"; ?>
+            <style>
+                button#processImage,.resultAnalize {
+                    display:block !important;
+                }
+            </style>
+        <?php } catch(ServiceException $e) {
             $code = $e->getCode();
             $error_message = $e->getMessage();
             echo $code.": ".$error_message."<br />";
@@ -96,7 +101,7 @@ if(isset($_POST["submit"])) {
             <center>
                 <img id="sourceImage" width="400" style="margin-top:60px;"/>
             </center>   
-            <div class="resultAnalize" style="display:none;">
+            <div id="resultAnalize" style="display:none;">
                 <h3>Hasil Analisis</h3>
                 <textarea id="responseTextArea" style="width:580px; height:400px;"></textarea> 
             </div>

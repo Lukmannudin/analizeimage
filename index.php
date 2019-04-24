@@ -101,7 +101,7 @@ if(isset($_POST["submit"])) {
             <center>
                 <img id="sourceImage" width="400" style="margin-top:60px;"/>
             </center>   
-            <div class="resultAnalize">
+            <div class="resultAnalize" style="display:none;">
                 <h3>Hasil Analisis</h3>
                 <textarea id="responseTextArea" style="width:580px; height:400px;"></textarea> 
             </div>

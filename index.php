@@ -48,6 +48,7 @@ if(isset($_POST["submit"])) {
                     echo $blob->getName().": ".$blob->getUrl()."<br />";
                     echo "<p id='targetFileBlob' style='display:none;'>".
                     $blob->getUrl() . "</p>";
+                    echo "<img src='" . $blob->getUrl() . "' />";
                 }
             
                 $listBlobsOptions->setContinuationToken($result->getContinuationToken());

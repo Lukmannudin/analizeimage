@@ -76,46 +76,6 @@ if(isset($_POST["submit"])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Analisa Gambar</title>
-    <style>
-        button#processImage,.resultAnalize {
-            display:block !important;
-        }
-
-        .main {
-            display:flex;
-        }
-
-        .form{
-            width:50%;
-            height:500px;
-        }
-
-        .form .inner-form {
-            width:300px;
-            height:100px;
-            margin: 20% auto;
-            padding:1%;
-            border: black 2px dotted;
-        }
-
-        .body {
-            width:50%;
-            height:500px;
-        }
-
-        .button {
-            background-color: #4CAF50; /* Green */
-            border: none;
-            color: white;
-            padding: 15px 32px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            margin: 4px 2px;
-            cursor: pointer;
-        }
-    </style>    
 </head>
 <body>
     <div class="main">

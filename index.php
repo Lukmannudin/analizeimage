@@ -18,13 +18,12 @@ $createContainerOptions->addMetaData("key1", "value1");
 $createContainerOptions->addMetaData("key2", "value2");
 $containerName = "mycontainer";
 if(isset($_POST["submit"])) {
-    $target_dir = "uploads/";
+    $target_dir = "";
     $filename = str_replace(' ', '_', $_FILES["fileToUpload"]["name"]);
     $target_file = $target_dir . basename($filename);
     move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file);
-    $fileToUpload = "$target_dir"."$filename";
+    $fileToUpload = $target_dir . $filename;
     $fileToUpload = str_replace(' ', '_', $fileToUpload);
-    echo $fileToUpload;
     if (file_exists($target_file)) {
         try {
             $myfile = fopen($fileToUpload, "r") or die("Unable to open file!");

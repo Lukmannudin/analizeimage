@@ -8,7 +8,7 @@ use MicrosoftAzure\Storage\Blob\Models\ListBlobsOptions;
 use MicrosoftAzure\Storage\Blob\Models\CreateContainerOptions;
 use MicrosoftAzure\Storage\Blob\Models\PublicAccessType;
 
-$connectionString = "DefaultEndpointsProtocol=https;AccountName=dicodinggolokstore;AccountKey=LLbTrj6RAWfJKQ5Hy7Q0pk93hNxzJMY8HAjW9XJwJn6PO/aC33fqhkY4TwugOmfwWtRaHuOFPc7/c2v5+2U5/A==;EndpointSuffix=core.windows.net";
+$connectionString = "DefaultEndpointsProtocol=https;AccountName=dicodinggolok;AccountKey=C/umzJnNz7D/xxP4rJN2jCuFXhyi2m8jmfF6hrE3gqrpEuEM2kIGGH856+kkdL07KKSAOx3v0Hs+Ze1Qz1ul5g==;EndpointSuffix=core.windows.net";
 
 $blobClient = BlobRestProxy::createBlobService($connectionString);
 
@@ -46,15 +46,15 @@ if(isset($_POST["submit"])) {
                 $result = $blobClient->listBlobs($containerName, $listBlobsOptions);
                 foreach ($result->getBlobs() as $blob) {
                     echo $blob->getName().": ".$blob->getUrl()."<br />";
-                    echo "<p id='targetFileBlob' style='display:none;'>".
-                    $blob->getUrl() . "</p>";
-                    echo "<img src='" . $blob->getUrl() . "' />";
                 }
             
                 $listBlobsOptions->setContinuationToken($result->getContinuationToken());
             } while($result->getContinuationToken());
             echo "<br />";
             echo "This is the content of the blob uploaded: ";
+            echo "<p id='targetFileBlob' style='display:none;'>".
+                    "https://olegstore.blob.core.windows.net/" .
+                    $containerName . "/" . $fileToUpload . "</p>";
             echo "<br />";
         } catch(ServiceException $e) {
             $code = $e->getCode();

@@ -24,6 +24,7 @@ if(isset($_POST["submit"])) {
     move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file);
     $fileToUpload = "$target_dir"."$filename";
     $fileToUpload = str_replace(' ', '_', $fileToUpload);
+    echo $fileToUpload;
     if (file_exists($target_file)) {
         try {
             $myfile = fopen($fileToUpload, "r") or die("Unable to open file!");
@@ -34,7 +35,7 @@ if(isset($_POST["submit"])) {
             echo "<br />";
             
             $content = fopen($fileToUpload, "r");
-
+            
             $blobClient->createBlockBlob($containerName, $fileToUpload, $content);
             
             $listBlobsOptions = new ListBlobsOptions();
@@ -52,7 +53,7 @@ if(isset($_POST["submit"])) {
             } while($result->getContinuationToken());
             echo "<br />";
             echo "This is the content of the blob uploaded: ";
-            echo "<p id='targetFileBlob'>".
+            echo "<p id='targetFileBlob' style='display:none;'>".
                 "https://dicodinggolokstore.blob.core.windows.net/". $containerName. "/". $fileToUpload .
                 "</p>";
             echo "<br />";

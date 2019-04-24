@@ -52,15 +52,9 @@ if(isset($_POST["submit"])) {
             } while($result->getContinuationToken());
             echo "<br />";
             echo "This is the content of the blob uploaded: ";
-            echo "<p id='targetFileBlob' style='display:none;'>".
+            echo "<p id='targetFileBlob'>".
                 "https://dicodinggolokstore.blob.core.windows.net/". $containerName. "/". $fileToUpload .
-                "</p>";?>
-            <style>
-                button#processImage,.resultAnalize {
-                    display:block !important;
-                }
-            </style>
-            <?php
+                "</p>";
             echo "<br />";
         } catch(ServiceException $e) {
             $code = $e->getCode();
@@ -83,6 +77,10 @@ if(isset($_POST["submit"])) {
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Analisa Gambar</title>
     <style>
+        button#processImage,.resultAnalize {
+            display:block !important;
+        }
+
         .main {
             display:flex;
         }

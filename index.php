@@ -53,7 +53,7 @@ if(isset($_POST["submit"])) {
             echo "<br />";
             echo "This is the content of the blob uploaded: ";
             echo "<p id='targetFileBlob' style='display:none;'>".
-                    "https://olegstore.blob.core.windows.net/" .
+                    "https://dicodinggolok.blob.core.windows.net/" .
                     $containerName . "/" . $fileToUpload . "</p>";
             echo "<br />";
         } catch(ServiceException $e) {

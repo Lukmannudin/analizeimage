@@ -41,7 +41,7 @@ use MicrosoftAzure\Storage\Blob\Models\ListBlobsOptions;
 use MicrosoftAzure\Storage\Blob\Models\CreateContainerOptions;
 use MicrosoftAzure\Storage\Blob\Models\PublicAccessType;
 
-$connectionString = "DefaultEndpointsProtocol=https;AccountName=olegstore;AccountKey=yG2vxEgOCV/fIugr5BbMZdAVmQ4jpm77msKFG2Aa3XVBKkh8XwYpGP129lbjuyk9lBDJkZWZpFxEYUvMexQumA==;EndpointSuffix=core.windows.net";
+$connectionString = "DefaultEndpointsProtocol=https;AccountName=dicodinggolokstore;AccountKey=LLbTrj6RAWfJKQ5Hy7Q0pk93hNxzJMY8HAjW9XJwJn6PO/aC33fqhkY4TwugOmfwWtRaHuOFPc7/c2v5+2U5/A==;EndpointSuffix=core.windows.net";
 
 // Create blob client.
 $blobClient = BlobRestProxy::createBlobService($connectionString);
@@ -247,7 +247,7 @@ else
             document.querySelector("#sourceImage").src = sourceImageUrl;
         function processImage(){ 
             document.getElementById("responseTextArea").value = "On Proggress, Please Wait...";
-        var subscriptionKey = "f756a031fd4b4335a3b3fe9842f86bed";
+        var subscriptionKey = "e36088d6afc04c74abf2c3b4bfb14276";
  
                 // You must use the same Azure region in your REST API method as you used to
                 // get your subscription keys. For example, if you got your subscription keys

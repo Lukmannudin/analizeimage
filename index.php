@@ -75,43 +75,51 @@ if(isset($_POST["submit"])) {
         echo "File nya ga ada";
     }
 }?>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
-<style>
-    .main {
-        display:flex;
-    }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Analisa Gambar</title>
+    <style>
+        .main {
+            display:flex;
+        }
 
-    .form{
-        width:50%;
-        height:500px;
-    }
+        .form{
+            width:50%;
+            height:500px;
+        }
 
-    .form .inner-form {
-        width:300px;
-        height:100px;
-        margin: 20% auto;
-        padding:1%;
-        border: black 2px dotted;
-    }
+        .form .inner-form {
+            width:300px;
+            height:100px;
+            margin: 20% auto;
+            padding:1%;
+            border: black 2px dotted;
+        }
 
-    .body {
-        width:50%;
-        height:500px;
-    }
+        .body {
+            width:50%;
+            height:500px;
+        }
 
-    .button {
-        background-color: #4CAF50; /* Green */
-        border: none;
-        color: white;
-        padding: 15px 32px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 16px;
-        margin: 4px 2px;
-        cursor: pointer;
-    }
-</style>    
+        .button {
+            background-color: #4CAF50; /* Green */
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+    </style>    
+</head>
+<body>
     <div class="main">
         <div class="form">
             <div class="inner-form">
@@ -136,6 +144,8 @@ if(isset($_POST["submit"])) {
             </div>
         </div>
     </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
     <script>
         var sourceImageUrl = document.getElementById("targetFileBlob").textContent;
             
@@ -170,3 +180,5 @@ if(isset($_POST["submit"])) {
             });
         }
     </script>
+</body>
+</html>

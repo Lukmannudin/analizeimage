@@ -18,7 +18,7 @@ $createContainerOptions->addMetaData("key1", "value1");
 $createContainerOptions->addMetaData("key2", "value2");
 $containerName = "mycontainer";
 if(isset($_POST["submit"])) {
-    $target_dir = "";
+    $target_dir = "uploads/";
     $filename = str_replace(' ', '_', $_FILES["fileToUpload"]["name"]);
     $target_file = $target_dir . basename($filename);
     move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file);
@@ -46,15 +46,14 @@ if(isset($_POST["submit"])) {
                 $result = $blobClient->listBlobs($containerName, $listBlobsOptions);
                 foreach ($result->getBlobs() as $blob) {
                     echo $blob->getName().": ".$blob->getUrl()."<br />";
+                    echo "<p id='targetFileBlob' style='display:none;'>".
+                    $blob->getUrl() . "</p>";
                 }
             
                 $listBlobsOptions->setContinuationToken($result->getContinuationToken());
             } while($result->getContinuationToken());
             echo "<br />";
             echo "This is the content of the blob uploaded: ";
-            echo "<p id='targetFileBlob' style='display:none;'>".
-                "https://dicodinggolokstore.blob.core.windows.net/". $containerName. "/". $fileToUpload .
-                "</p>";
             echo "<br />";
         } catch(ServiceException $e) {
             $code = $e->getCode();

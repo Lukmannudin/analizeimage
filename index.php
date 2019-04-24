@@ -57,7 +57,7 @@ if(isset($_POST["submit"])) {
                     $containerName . "/" . $fileToUpload . "</p>";
             echo "<br />"; ?>
             <style>
-                button#processImage,.resultAnalize {
+                button#processImage, .resultAnalize {
                     display:block !important;
                 }
             </style>
@@ -101,7 +101,7 @@ if(isset($_POST["submit"])) {
             <center>
                 <img id="sourceImage" width="400" style="margin-top:60px;"/>
             </center>   
-            <div class="resultAnalize" style="display:none;">
+            <div class="resultAnalize">
                 <h3>Hasil Analisis</h3>
                 <textarea id="responseTextArea" style="width:580px; height:400px;"></textarea> 
             </div>
